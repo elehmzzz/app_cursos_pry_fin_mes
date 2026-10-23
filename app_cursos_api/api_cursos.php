@@ -1,20 +1,22 @@
 
+
 <?php
-header("Content-Type: application/json; charset=UTF-8");
+header("Content-Type: application/json; charset=utf-8");
 
 require_once "conexion.php";
 
-$sql = "SELECT * FROM cursos";
+try {
+    $sql = "SELECT * FROM cursos";
+    $consulta = $pdo->query($sql);
+    $cursos = $consulta->fetchAll();
 
-$resultado = $conn->query($sql);
+    echo json_encode($cursos, JSON_UNESCAPED_UNICODE);
 
-$cursos = array();
-
-while ($fila = $resultado->fetch_assoc()) {
-    $cursos[] = $fila;
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode([
+        "error" => "Error al consultar los cursos"
+    ], JSON_UNESCAPED_UNICODE);
 }
-
-echo json_encode($cursos, JSON_UNESCAPED_UNICODE);
-
-$conn->close();
 ?>
+
