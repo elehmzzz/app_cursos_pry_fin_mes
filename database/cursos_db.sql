@@ -16,26 +16,6 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`cursos_db` /*!40100 DEFAULT CHARACTER S
 
 USE `cursos_db`;
 
-/*Table structure for table `alumnos` */
-
-DROP TABLE IF EXISTS `alumnos`;
-
-CREATE TABLE `alumnos` (
-  `id_alumno` int(11) NOT NULL AUTO_INCREMENT,
-  `matricula` varchar(20) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `apellido_paterno` varchar(100) NOT NULL,
-  `apellido_materno` varchar(100) DEFAULT NULL,
-  `correo_institucional` varchar(150) NOT NULL,
-  PRIMARY KEY (`id_alumno`),
-  UNIQUE KEY `matricula` (`matricula`),
-  UNIQUE KEY `correo_institucional` (`correo_institucional`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*Data for the table `alumnos` */
-
-insert  into `alumnos`(`id_alumno`,`matricula`,`nombre`,`apellido_paterno`,`apellido_materno`,`correo_institucional`) values (1,'20260001','Ana','Hernandez','Martinez','20260001@uthh.edu.mx'),(2,'20260002','Carlos','Ramirez','Lopez','20260002@uthh.edu.mx'),(3,'20260003','Maria','Cruz','Hernandez','20260003@uthh.edu.mx'),(4,'20260004','Jose','Martinez','Sanchez','20260004@uthh.edu.mx'),(5,'20260005','Daniela','Lopez','Garcia','20260005@uthh.edu.mx'),(6,'20260006','Luis','Hernandez','Cruz','20260006@uthh.edu.mx'),(7,'20260007','Fernanda','Sanchez','Ramirez','20260007@uthh.edu.mx'),(8,'20260008','Miguel','Garcia','Martinez','20260008@uthh.edu.mx'),(9,'20260009','Sofia','Reyes','Hernandez','20260009@uthh.edu.mx'),(10,'20260010','Diego','Morales','Cruz','20260010@uthh.edu.mx'),(11,'20260011','Valeria','Torres','Lopez','20260011@uthh.edu.mx'),(12,'20260012','Jorge','Santos','Ramirez','20260012@uthh.edu.mx'),(13,'20260013','Camila','Mendoza','Garcia','20260013@uthh.edu.mx'),(14,'20260014','Fernando','Vazquez','Hernandez','20260014@uthh.edu.mx'),(15,'20260015','Andrea','Castillo','Martinez','20260015@uthh.edu.mx'),(16,'20260016','Eduardo','Flores','Sanchez','20260016@uthh.edu.mx'),(17,'20260017','Regina','Gonzalez','Cruz','20260017@uthh.edu.mx'),(18,'20260018','Alejandro','Ortiz','Lopez','20260018@uthh.edu.mx'),(19,'20260019','Ximena','Rivera','Hernandez','20260019@uthh.edu.mx'),(20,'20260020','Sebastian','Aguilar','Martinez','20260020@uthh.edu.mx');
-
 /*Table structure for table `carreras` */
 
 DROP TABLE IF EXISTS `carreras`;
@@ -84,19 +64,41 @@ DROP TABLE IF EXISTS `inscripciones`;
 
 CREATE TABLE `inscripciones` (
   `id_inscripcion` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_registro` date NOT NULL,
+  `fecha_inscripcion` date NOT NULL,
   `id_curso` int(11) NOT NULL,
-  `id_alumno` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
   PRIMARY KEY (`id_inscripcion`),
-  UNIQUE KEY `id_curso` (`id_curso`,`id_alumno`),
-  KEY `id_alumno` (`id_alumno`),
+  UNIQUE KEY `id_curso` (`id_curso`,`id_usuario`),
+  KEY `id_alumno` (`id_usuario`),
   CONSTRAINT `inscripciones_ibfk_1` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id_curso`),
-  CONSTRAINT `inscripciones_ibfk_2` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`id_alumno`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `inscripciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `inscripciones` */
 
-insert  into `inscripciones`(`id_inscripcion`,`fecha_registro`,`id_curso`,`id_alumno`) values (1,'2026-10-20',1,1),(2,'2026-10-20',1,2),(3,'2026-10-20',1,3),(4,'2026-10-21',2,4),(5,'2026-10-21',2,5),(6,'2026-10-21',5,6),(7,'2026-10-21',5,7),(8,'2026-10-22',5,1),(9,'2026-10-22',6,8),(10,'2026-10-22',6,9),(11,'2026-10-22',19,10),(12,'2026-10-22',20,10);
+insert  into `inscripciones`(`id_inscripcion`,`fecha_inscripcion`,`id_curso`,`id_usuario`) values (1,'2026-10-20',1,1),(2,'2026-10-20',1,2),(3,'2026-10-20',1,3),(4,'2026-10-21',2,4),(5,'2026-10-21',2,5),(6,'2026-10-21',5,6),(7,'2026-10-21',5,7),(8,'2026-10-22',5,1),(9,'2026-10-22',6,8),(10,'2026-10-22',6,9),(11,'2026-10-22',19,10),(12,'2026-10-22',20,10);
+
+/*Table structure for table `usuarios` */
+
+DROP TABLE IF EXISTS `usuarios`;
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `matricula` varchar(20) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `apellido_paterno` varchar(100) NOT NULL,
+  `apellido_materno` varchar(100) DEFAULT NULL,
+  `correo_institucional` varchar(150) NOT NULL,
+  `contrasena` varchar(255) NOT NULL,
+  `fecha_creacion` date NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `matricula` (`matricula`),
+  UNIQUE KEY `correo_institucional` (`correo_institucional`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+/*Data for the table `usuarios` */
+
+insert  into `usuarios`(`id_usuario`,`matricula`,`nombre`,`apellido_paterno`,`apellido_materno`,`correo_institucional`,`contrasena`,`fecha_creacion`) values (1,'20260001','Ana','Hernandez','Martinez','20260001@uthh.edu.mx','prueba123','2026-10-24'),(2,'20260002','Carlos','Ramirez','Lopez','20260002@uthh.edu.mx','prueba123','2026-10-24'),(3,'20260003','Maria','Cruz','Hernandez','20260003@uthh.edu.mx','prueba123','2026-10-24'),(4,'20260004','Jose','Martinez','Sanchez','20260004@uthh.edu.mx','prueba123','2026-10-24'),(5,'20260005','Daniela','Lopez','Garcia','20260005@uthh.edu.mx','prueba123','2026-10-24'),(6,'20260006','Luis','Hernandez','Cruz','20260006@uthh.edu.mx','prueba123','2026-10-24'),(7,'20260007','Fernanda','Sanchez','Ramirez','20260007@uthh.edu.mx','prueba123','2026-10-24'),(8,'20260008','Miguel','Garcia','Martinez','20260008@uthh.edu.mx','prueba123','2026-10-24'),(9,'20260009','Sofia','Reyes','Hernandez','20260009@uthh.edu.mx','prueba123','2026-10-24'),(10,'20260010','Diego','Morales','Cruz','20260010@uthh.edu.mx','prueba123','2026-10-24'),(11,'20260011','Valeria','Torres','Lopez','20260011@uthh.edu.mx','prueba123','2026-10-24'),(12,'20260012','Jorge','Santos','Ramirez','20260012@uthh.edu.mx','prueba123','2026-10-24'),(13,'20260013','Camila','Mendoza','Garcia','20260013@uthh.edu.mx','prueba123','2026-10-24'),(14,'20260014','Fernando','Vazquez','Hernandez','20260014@uthh.edu.mx','prueba123','2026-10-24'),(15,'20260015','Andrea','Castillo','Martinez','20260015@uthh.edu.mx','prueba123','2026-10-24'),(16,'20260016','Eduardo','Flores','Sanchez','20260016@uthh.edu.mx','prueba123','2026-10-24'),(17,'20260017','Regina','Gonzalez','Cruz','20260017@uthh.edu.mx','prueba123','2026-10-24'),(18,'20260018','Alejandro','Ortiz','Lopez','20260018@uthh.edu.mx','prueba123','2026-10-24'),(19,'20260019','Ximena','Rivera','Hernandez','20260019@uthh.edu.mx','prueba123','2026-10-24'),(20,'20260020','Sebastian','Aguilar','Martinez','20260020@uthh.edu.mx','prueba123','2026-10-24');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
