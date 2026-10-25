@@ -2,7 +2,7 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
 
-require_once "conexion.php";
+require_once "config/conexion.php";
 
 try {
     if (!isset($_GET["id"])) {
