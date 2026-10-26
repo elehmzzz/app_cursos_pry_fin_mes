@@ -13,7 +13,10 @@ interface ApiService {
     suspend fun obtenerDetalleCurso()
 
     //mediante un id el alumno se inscribe a un curso si hay cupo
-    @POST("registro_curso.php")
+    @POST("inscripcion_curso.php")
     suspend fun inscribirseCurso()
+
+    @GET("obtener_estado_cursos.php")
+    suspend fun obtenerEstadocursos()
 
 }
