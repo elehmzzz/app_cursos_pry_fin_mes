@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App_cursos">
         <activity
-            android:name=".vista.Vistas.MainActivity"
+            android:name=".Vistas.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -22,23 +22,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".vista.Vistas.LoginActivity"
+            android:name=".Vistas.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".vista.Vistas.RegistroActivity"
+            android:name=".Vistas.RegistroActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".vista.Vistas.DetalleCursoActivity"
+            android:name=".Vistas.DetalleCursoActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".vista.Vistas.InscripcionActivity"
+            android:name=".Vistas.InscripcionActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".vista.Vistas.VerRegistrosActivity"
+            android:name=".Vistas.VerRegistrosActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>

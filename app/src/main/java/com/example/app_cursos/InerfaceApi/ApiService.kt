@@ -1,4 +1,4 @@
-package com.example.app_cursos.vista.InerfaceApi
+package com.example.app_cursos.InerfaceApi
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
