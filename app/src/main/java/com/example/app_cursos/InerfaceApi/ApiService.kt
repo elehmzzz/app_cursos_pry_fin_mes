@@ -4,16 +4,19 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("api_cursos.php") //
+    //devuelve todos los cursos disponibles
+    @GET("api_cursos.php")
     suspend fun obtenerCursos()
 
-    @GET("api_obtenerInscripciones.php")
-    suspend fun obtenerInscripciones()
-
+    //devuelve el detalle de un curso como nombre, carrera, salon,etc
     @GET("api_detalle_curso.php")
     suspend fun obtenerDetalleCurso()
 
-    @POST("api_registrarInscripcion.php")
+    //mediante un id el alumno se inscribe a un curso si hay cupo
+    @POST("inscripcion_curso.php")
     suspend fun inscribirseCurso()
+
+    @GET("obtener_estado_cursos.php")
+    suspend fun obtenerEstadocursos()
 
 }
