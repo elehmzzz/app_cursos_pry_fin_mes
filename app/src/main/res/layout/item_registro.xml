@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@android:color/white"
+    android:elevation="3dp"
+    android:padding="12dp">
+
+    <!-- Imagen del curso -->
+    <ImageView
+        android:id="@+id/imgCurso"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="Imagen del curso"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/curder" />
+
+    <!-- Nombre del curso -->
+    <TextView
+        android:id="@+id/txtNombreCurso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="4dp"
+        android:maxLines="2"
+        android:textColor="#212529"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgCurso"
+        app:layout_constraintTop_toTopOf="@id/imgCurso"
+        tools:text="PROGRAMACIÓN AVANZADA" />
+
+    <!-- Barra de progreso -->
+    <ProgressBar
+        android:id="@+id/progressInscritos"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:max="50"
+        android:progress="40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgCurso"
+        app:layout_constraintTop_toBottomOf="@id/txtNombreCurso" />
+
+    <!-- Cantidad de inscritos -->
+    <TextView
+        android:id="@+id/txtCantidadInscritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="7dp"
+        android:textColor="#495057"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/imgCurso"
+        app:layout_constraintTop_toBottomOf="@id/progressInscritos"
+        tools:text="40 inscritos" />
+
+    <!-- Cupo total -->
+    <TextView
+        android:id="@+id/txtCupoTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:textColor="#495057"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressInscritos"
+        tools:text="/ 50 total" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
