@@ -15,7 +15,7 @@ interface ApiService {
     //mediante un id el alumno se inscribe a un curso si hay cupo
     @POST("inscripcion_curso.php")
     suspend fun inscribirseCurso()
-
+    //obtiene el estado de los cursos y sirve en la vista estados para ver los cursos y el cupo
     @GET("obtener_estado_cursos.php")
     suspend fun obtenerEstadocursos()
 
