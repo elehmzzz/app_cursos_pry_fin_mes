@@ -1,5 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
+    //1.Agregar el plugin de kotlin serialization
+    kotlin("plugin.serialization") version "2.3.20" // asegurate de tener la vevrsión acorde a tu kotlin
+
 }
 
 android {
@@ -42,4 +45,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    //codigo para el funcionamiento del Retrofit
+    //2. libreria principal de kotlinx serialization Json
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    //3. convertidor oficial de Retrofit para kotlinx serialization
+    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")
+    //Retrofit & OKHttp
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    //para imagenes
+    implementation("com.github.bumbtech.glide:glide:4.16.0")
+
 }

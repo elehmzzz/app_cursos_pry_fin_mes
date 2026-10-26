@@ -1,4 +1,4 @@
-package com.example.app_cursos.vista
+package com.example.app_cursos.vista.Vistas
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
