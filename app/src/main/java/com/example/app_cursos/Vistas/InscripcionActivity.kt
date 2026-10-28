@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsInscripcionPresentador
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class InscripcionActivity : AppCompatActivity() {
 
@@ -21,6 +25,9 @@ class InscripcionActivity : AppCompatActivity() {
     private lateinit var txtFechaInscripcion: TextView
     private lateinit var btnConfirmarInscripcion: Button
     private lateinit var btnCancelar: Button
+
+    private var idCurso: Int = -1
+    private var idUsuario: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,25 @@ class InscripcionActivity : AppCompatActivity() {
         btnConfirmarInscripcion = findViewById(R.id.btnConfirmarInscripcion)
         btnCancelar = findViewById(R.id.btnCancelar)
 
+        // 1. Recibir datos enviados desde DetalleCursoActivity o Login
+        idCurso = intent.getIntExtra("id_curso", -1)
+        idUsuario = intent.getIntExtra("id_usuario", -1)
+        val nombreCurso = intent.getStringExtra("nombre_curso") ?: ""
+        val codigoCurso = intent.getStringExtra("codigo_curso") ?: ""
+        val matriculaUsuario = intent.getStringExtra("matricula") ?: ""
+        val nombreUsuario = intent.getStringExtra("nombre_usuario") ?: ""
+        val correoUsuario = intent.getStringExtra("correo_usuario") ?: ""
+
+        // 2. Mostrar la información real en la vista
+        txtNombreCurso.text = nombreCurso
+        txtCodigoCurso.text = "Código: $codigoCurso"
+        txtMatricula.text = "Matrícula: $matriculaUsuario"
+        txtNombreAlumno.text = "Alumno: $nombreUsuario"
+        txtCorreo.text = "Correo: $correoUsuario"
+
+        // Generar la fecha actual del sistema para mostrarla en pantalla
+        val fechaActual = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        txtFechaInscripcion.text = "Fecha de inscripción: $fechaActual"
         btnConfirmarInscripcion.setOnClickListener {
             confirmarInscripcion()
         }
@@ -57,6 +83,14 @@ class InscripcionActivity : AppCompatActivity() {
     private fun confirmarInscripcion() {
         // TODO: Enviar la confirmación al Presenter
         // cuando esté disponible.
+        if (idCurso == -1 || idUsuario == -1) {
+            return
+        }
+
+        val presentador = clsInscripcionPresentador()
+        presentador.registrarInscripcion(this, idUsuario, idCurso) {
+            finish()
+        }
     }
 
     private fun cancelarInscripcion() {
