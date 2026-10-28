@@ -15,6 +15,6 @@ data class dataCursos (
     @SerialName("dias_atencion") val dias_atencion: String = "",
     @SerialName("horario") val horario: String = "",
     @SerialName("cupo_maximo") val cupo_maximo: String = "0.0",
-    @SerialName("imagen") val imagen:String = ""
+    @SerialName("imagen") val urlImagen:String = ""
 ){
 }
