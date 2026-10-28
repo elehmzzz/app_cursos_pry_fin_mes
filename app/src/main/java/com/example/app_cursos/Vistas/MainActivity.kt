@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.app_cursos.Adaptador.cursosAdaptador
 import com.example.app_cursos.R
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rvCursos: RecyclerView
     private lateinit var btnVerRegistros: Button
     private lateinit var txtMenu: TextView
+
+    //linea hecha por tello-lo ocupaba por eso
+    private lateinit var adapterCursos: cursosAdaptador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         rvCursos = findViewById(R.id.rvCursos)
         btnVerRegistros = findViewById(R.id.btnVerRegistros)
         txtMenu = findViewById(R.id.txtMenu)
+
+        //codigo hecho por tellos
+        adapterCursos = cursosAdaptador(this, emptyList())
 
         configurarRecyclerView()
 

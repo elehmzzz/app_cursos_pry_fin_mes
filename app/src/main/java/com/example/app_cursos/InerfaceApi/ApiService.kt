@@ -1,6 +1,8 @@
 package com.example.app_cursos.InerfaceApi
 import com.example.app_cursos.modelo.clsLoginRequest
 import com.example.app_cursos.modelo.clsLoginResponse
+import com.example.app_cursos.modelo.dataCategorias
+import com.example.app_cursos.modelo.dataCursos
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Body
@@ -10,7 +12,7 @@ interface ApiService {
     //CODIGO PENDIENTE
     //devuelve todos los cursos disponibles
     @GET("api_cursos.php")
-    suspend fun obtenerCursos()
+    suspend fun obtenerCursos(): List<dataCursos>
 
     //devuelve el detalle de un curso como nombre, carrera, salon,etc
     @GET("api_detalle_curso.php")
