@@ -62,6 +62,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // TODO: Enviar matrícula y contraseña al Presenter
+        val presentador = clsLoginPresentador()
+        presentador.autenticar(this, matricula, contrasena)
     }
 
     private fun irARegistro() {
