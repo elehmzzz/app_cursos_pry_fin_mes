@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     //linea hecha por tello-lo ocupaba por eso
     private lateinit var adapterCursos: cursosAdaptador
+    private lateinit var presentadorCatalogo: clsCatalogoPresentador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,18 +44,15 @@ class MainActivity : AppCompatActivity() {
 
         //codigo hecho por tellos
         adapterCursos = cursosAdaptador(this, emptyList())
+        presentadorCatalogo = clsCatalogoPresentador()
 
         configurarRecyclerView()
+        cargarCursos()
 
         btnVerRegistros.setOnClickListener {
             irARegistros()
         }
-
-        cargarCursos()
         // TODO: Cargar las carreras en spnCarrera
-        // cuando esté disponible el Presenter/API correspondiente.
-
-        // TODO: Cargar los cursos en rvCursos
         // cuando esté disponible el Presenter/API correspondiente.
 
         // TODO: Agregar las opciones de txtMenu
@@ -63,13 +61,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun configurarRecyclerView() {
         rvCursos.layoutManager = GridLayoutManager(this, 2)
+        rvCursos.adapter = adapterCursos
     }
     private fun cargarCursos() {
-        val presentador = clsCatalogoPresentador()
-        presentador.obtenerCursos(this) { listaCursos ->
-            // TODO: aqui le quitan los comentarios depentiendo su logica del adaptador, asignar 'listaCursos' al adaptador del RecyclerView
-            //val adaptador = CursoAdapter(listaCursos)
-            //rvCursos.adapter = adaptador
+        presentadorCatalogo.obtenerCursos(this) { listaCursos ->
+            adapterCursos.actualizarLista(listaCursos)
         }
     }
 
