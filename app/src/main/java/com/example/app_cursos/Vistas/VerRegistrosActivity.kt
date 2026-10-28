@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsVerRegistrosPresentador
 
 class VerRegistrosActivity : AppCompatActivity() {
 
@@ -39,6 +40,7 @@ class VerRegistrosActivity : AppCompatActivity() {
         txtRegresar.setOnClickListener {
             finish()
         }
+        cargarRegistros()
 
         // TODO: Cargar las carreras en spnCarrera
         // cuando esté disponible el Presenter/API correspondiente.
@@ -50,5 +52,16 @@ class VerRegistrosActivity : AppCompatActivity() {
 
     private fun configurarRecyclerView() {
         rvRegistros.layoutManager = LinearLayoutManager(this)
+    }
+    private fun cargarRegistros() {
+        val presentador = clsVerRegistrosPresentador()
+        presentador.obtenerRegistros(this) { listaRegistros ->
+            // 1. Mostrar el total de inscritos en el TextView
+            txtTotalInscritos.text = "Total de inscritos: ${listaRegistros.size}"
+
+            // 2. Aquí asignan la lista al adaptador del RecyclerView:
+            // val adaptador = RegistrosAdapter(listaRegistros)
+            // rvRegistros.adapter = adaptador
+        }
     }
 }
