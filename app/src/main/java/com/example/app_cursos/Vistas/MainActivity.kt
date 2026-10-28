@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_cursos.Adaptador.cursosAdaptador
+import com.example.app_cursos.modelo.dataCursos
 import com.example.app_cursos.R
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +65,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun irARegistros() {
         val intent = Intent(this, VerRegistrosActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun seleccionarCurso(curso: dataCursos) {
+        val intent = Intent(this, DetalleCursoActivity::class.java)
+        intent.putExtra("id_curso", curso.id)
         startActivity(intent)
     }
 }
