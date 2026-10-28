@@ -1,4 +1,6 @@
 package com.example.app_cursos.InerfaceApi
+import com.example.app_cursos.modelo.clsLoginRequest
+import com.example.app_cursos.modelo.clsLoginResponse
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Body
@@ -23,6 +25,6 @@ interface ApiService {
     suspend fun inscribirseCurso()
 
     @POST("login.php")
-    suspend fun iniciarSesion()
+    suspend fun iniciarSesion(@Body request: clsLoginRequest): clsLoginResponse
 
 }
