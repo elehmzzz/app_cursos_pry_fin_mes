@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsCatalogoPresentador
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             irARegistros()
         }
 
+        cargarCursos()
         // TODO: Cargar las carreras en spnCarrera
         // cuando esté disponible el Presenter/API correspondiente.
 
@@ -53,6 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun configurarRecyclerView() {
         rvCursos.layoutManager = GridLayoutManager(this, 2)
+    }
+    private fun cargarCursos() {
+        val presentador = clsCatalogoPresentador()
+        presentador.obtenerCursos(this) { listaCursos ->
+            // TODO: aqui le quitan los comentarios depentiendo su logica del adaptador, asignar 'listaCursos' al adaptador del RecyclerView
+            //val adaptador = CursoAdapter(listaCursos)
+            //rvCursos.adapter = adaptador
+        }
     }
 
     private fun irARegistros() {

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsRegistroPresentador
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -94,8 +95,18 @@ class RegistroActivity : AppCompatActivity() {
             return
         }
 
-        // TODO: Enviar los datos al Presenter
-        // cuando el Presenter de registro esté disponible.
+        val presentador = clsRegistroPresentador()
+        presentador.registrar(
+            this,
+            matricula,
+            nombre,
+            apellidoPaterno,
+            apellidoMaterno,
+            correo,
+            contrasena
+        ) {
+            finish()
+        }
     }
 
     private fun irALogin() {

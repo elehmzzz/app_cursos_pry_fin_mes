@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsDetalleCursoPresentador
 
 class DetalleCursoActivity : AppCompatActivity() {
 
@@ -24,6 +25,8 @@ class DetalleCursoActivity : AppCompatActivity() {
     private lateinit var txtDiasAtencion: TextView
     private lateinit var txtHorario: TextView
     private lateinit var btnInscribirse: Button
+    private var idCursoActual: Int = -1
+    private var codigoDelCurso: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,18 +54,44 @@ class DetalleCursoActivity : AppCompatActivity() {
         txtRegresar.setOnClickListener {
             finish()
         }
+        /* Obtener el ID real enviado desde el catálogo
+        idCursoActual = intent.getIntExtra("id_curso", -1)
+
+        if (idCursoActual != -1) {
+            cargarDetalleCurso(idCursoActual)
+        }*/
+
+        /* evento de clic en el botón "Ver Detalle" dentro del adaptador del RecyclerView asi que copean esto y borran de aqui
+        val intent = Intent(context, DetalleCursoActivity::class.java).apply {
+            putExtra("id_curso", curso.id_curso)
+        }
+        context.startActivity(intent)*/
 
         btnInscribirse.setOnClickListener {
             irAInscripcion()
         }
-
-        // TODO: Recibir/obtener el curso seleccionado
-        // y mostrar sus datos cuando esté disponible
-        // el Presenter/API correspondiente.
+    }
+    private fun cargarDetalleCurso(idCurso: Int) {
+        val presentador = clsDetalleCursoPresentador()
+        presentador.obtenerDetalle(this, idCurso) { detalle ->
+            codigoDelCurso = detalle.codigo
+            txtNombreCurso.text = detalle.nombre
+            txtCodigoCurso.text = "Código: ${detalle.codigo}"
+            txtDescripcion.text = detalle.descripcion
+            txtSalon.text = "Salón: ${detalle.salon}"
+            txtEdificio.text = "Edificio: ${detalle.espacio}"
+            txtTotalHoras.text = "Total de horas: ${detalle.total_horas}"
+            txtDiasAtencion.text = "Días de atención: ${detalle.dias_atencion}"
+            txtHorario.text = "Horario: ${detalle.horario}"
+        }
     }
 
     private fun irAInscripcion() {
-        val intent = Intent(this, InscripcionActivity::class.java)
+        val intent = Intent(this, InscripcionActivity::class.java).apply {
+            putExtra("id_curso", idCursoActual)
+            putExtra("nombre_curso", txtNombreCurso.text.toString())
+            putExtra("codigo_curso", codigoDelCurso)
+        }
         startActivity(intent)
     }
 }
