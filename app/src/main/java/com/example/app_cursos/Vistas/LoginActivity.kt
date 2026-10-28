@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsLoginPresentador
 
 
 class LoginActivity : AppCompatActivity() {
@@ -61,7 +62,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // TODO: Enviar matrícula y contraseña al Presenter
-        // cuando clsLoginPresentador esté disponible.
+        val presentador = clsLoginPresentador()
+        presentador.autenticar(this, matricula, contrasena)
     }
 
     private fun irARegistro() {
