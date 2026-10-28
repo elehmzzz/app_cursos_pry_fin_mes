@@ -1,4 +1,5 @@
 <?php
+// Ocultar advertencias HTML para evitar romper la respuesta JSON de Retrofit
 ini_set('display_errors', 0);
 error_reporting(0);
 
@@ -23,12 +24,13 @@ if (empty($matricula) || empty($contrasena)) {
 }
 
 try {
-    // Consulta directa a tu tabla real 'usuarios' con PDO
-    $stmt = $pdo->prepare("SELECT id_usuario, matricula, nombre, apellido_paterno, apellido_materno, correo_institucional FROM usuarios WHERE matricula = ? AND contrasena = ?");
-    $stmt->execute([$matricula, $contrasena]);
+    // Buscamos al usuario únicamente por su matrícula para obtener su contraseña encriptada
+    $stmt = $pdo->prepare("SELECT id_usuario, matricula, nombre, apellido_paterno, apellido_materno, correo_institucional, contrasena FROM usuarios WHERE matricula = ?");
+    $stmt->execute([$matricula]);
     $usuario = $stmt->fetch();
 
-    if ($usuario) {
+    // Verificamos si el usuario existe y si la contraseña coincide con el hash seguro de la base de datos
+    if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
         echo json_encode([
             "exito" => true,
             "mensaje" => "¡Bienvenido/a " . $usuario['nombre'] . "!",

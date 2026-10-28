@@ -1,4 +1,5 @@
 package com.example.app_cursos.InerfaceApi
+import android.telecom.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -18,5 +19,4 @@ interface ApiService {
     //obtiene el estado de los cursos y sirve en la vista estados para ver los cursos y el cupo
     @GET("obtener_estado_cursos.php")
     suspend fun obtenerEstadocursos()
-
 }
