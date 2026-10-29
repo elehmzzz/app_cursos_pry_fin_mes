@@ -61,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // TODO: Enviar matrícula y contraseña al Presenter
         val presentador = clsLoginPresentador()
         presentador.autenticar(this, matricula, contrasena)
     }

@@ -5,7 +5,7 @@ header("Content-Type: application/json; charset=utf-8");
 require_once "config/conexion.php";
 
 try {
-    if (!isset($_GET["id"])) {
+    if (!isset($_GET["id_curso"])) {
         http_response_code(400);
         echo json_encode([
             "error" => "Debes proporcionar el ID del curso"
@@ -13,7 +13,7 @@ try {
         exit;
     }
 
-    $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+    $id = filter_input(INPUT_GET, "id_curso", FILTER_VALIDATE_INT);
 
     if ($id === false || $id === null || $id <= 0) {
         http_response_code(400);

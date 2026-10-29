@@ -12,8 +12,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_cursos.Adaptador.cursosAdaptador
-import com.example.app_cursos.R
 import com.example.app_cursos.modelo.dataCursos
+import com.example.app_cursos.R
+import com.example.app_cursos.presentador.clsCatalogoPresentador
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     //linea hecha por tello-lo ocupaba por eso
     private lateinit var adapterCursos: cursosAdaptador
+    private lateinit var presentadorCatalogo: clsCatalogoPresentador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +44,15 @@ class MainActivity : AppCompatActivity() {
 
         //codigo hecho por tellos
         adapterCursos = cursosAdaptador(this, emptyList())
+        presentadorCatalogo = clsCatalogoPresentador()
 
         configurarRecyclerView()
+        cargarCursos()
 
         btnVerRegistros.setOnClickListener {
             irARegistros()
         }
-
         // TODO: Cargar las carreras en spnCarrera
-        // cuando esté disponible el Presenter/API correspondiente.
-
-        // TODO: Cargar los cursos en rvCursos
         // cuando esté disponible el Presenter/API correspondiente.
 
         // TODO: Agregar las opciones de txtMenu
@@ -61,15 +61,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun configurarRecyclerView() {
         rvCursos.layoutManager = GridLayoutManager(this, 2)
+        rvCursos.adapter = adapterCursos
+    }
+    private fun cargarCursos() {
+        presentadorCatalogo.obtenerCursos(this) { listaCursos ->
+            adapterCursos.actualizarLista(listaCursos)
+        }
     }
 
     private fun irARegistros() {
         val intent = Intent(this, VerRegistrosActivity::class.java)
         startActivity(intent)
     }
+
     fun seleccionarCurso(curso: dataCursos) {
         val intent = Intent(this, DetalleCursoActivity::class.java)
-        // Aquí enviaremos los datos del curso seleccionado.
+        intent.putExtra("id_curso", curso.id)
         startActivity(intent)
     }
 }

@@ -1,8 +1,16 @@
 package com.example.app_cursos.InerfaceApi
+import android.view.PixelCopy.request
+import androidx.core.view.DragAndDropPermissionsCompat.request
+import com.example.app_cursos.modelo.clsDetalleCursoResponse
+import com.example.app_cursos.modelo.clsEstadoCursoResponse
+import com.example.app_cursos.modelo.clsInscripcionRequest
+import com.example.app_cursos.modelo.clsInscripcionResponse
 import com.example.app_cursos.modelo.clsLoginRequest
 import com.example.app_cursos.modelo.clsLoginResponse
 import com.example.app_cursos.modelo.dataCategorias
 import com.example.app_cursos.modelo.dataCursos
+import com.example.app_cursos.modelo.clsRegistroRequest
+import com.example.app_cursos.modelo.clsRegistroResponse
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Body
@@ -16,17 +24,20 @@ interface ApiService {
 
     //devuelve el detalle de un curso como nombre, carrera, salon,etc
     @GET("api_detalle_curso.php")
-    suspend fun obtenerDetalleCurso()
+    suspend fun obtenerDetalleCurso(@Query("id_curso") idCurso: Int): clsDetalleCursoResponse
 
     //obtiene el estado de los cursos y sirve en la vista estados para ver los cursos y el cupo
     @GET("obtener_estado_cursos.php")
-    suspend fun obtenerEstadocursos()
+    suspend fun obtenerEstadocursos(): List<clsEstadoCursoResponse>
 
     //mediante un id el alumno se inscribe a un curso si hay cupo
     @POST("inscripcion_curso.php")
-    suspend fun inscribirseCurso()
+    suspend fun inscribirseCurso(@Body request: clsInscripcionRequest): clsInscripcionResponse
 
     @POST("login.php")
     suspend fun iniciarSesion(@Body request: clsLoginRequest): clsLoginResponse
+
+    @POST("registro_alumno.php")
+    suspend fun registrarUsuario(@Body request: clsRegistroRequest): clsRegistroResponse
 
 }
