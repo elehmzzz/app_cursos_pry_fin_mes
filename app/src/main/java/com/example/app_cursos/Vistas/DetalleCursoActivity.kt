@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
 import com.bumptech.glide.Glide
+import com.example.app_cursos.modelo.RetrofitCliente
 import com.example.app_cursos.presentador.clsDetalleCursoPresentador
 
 class DetalleCursoActivity : AppCompatActivity() {
@@ -81,7 +82,7 @@ class DetalleCursoActivity : AppCompatActivity() {
         presentador.obtenerDetalle(this, idCurso) { detalle ->
             codigoDelCurso = detalle.codigo
             imagenCurso = detalle.imagen ?: ""
-            val baseUrl = "http://192.168.1.138/app_cursos_api/"
+            val baseUrl = RetrofitCliente.BASE_URL
             val urlImagenCompleta = baseUrl + detalle.imagen
             Glide.with(this)
                 .load(urlImagenCompleta)

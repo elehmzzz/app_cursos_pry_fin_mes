@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
 import com.bumptech.glide.Glide
+import com.example.app_cursos.modelo.RetrofitCliente
 import com.example.app_cursos.presentador.clsInscripcionPresentador
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -60,7 +61,7 @@ class InscripcionActivity : AppCompatActivity() {
         val nombreUsuario = intent.getStringExtra("nombre_usuario") ?: ""
         val correoUsuario = intent.getStringExtra("correo_usuario") ?: ""
 
-        val baseUrl = "http://192.168.1.138/app_cursos_api/"
+        val baseUrl = RetrofitCliente.BASE_URL
         val urlImagenCompleta = baseUrl + imagenCurso
 
         Glide.with(this)

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.app_cursos.Vistas.MainActivity
 import com.example.app_cursos.modelo.dataCursos
+import com.example.app_cursos.modelo.RetrofitCliente
 
 class cursosAdaptador(private val activity: MainActivity, private var listaCursos: List<dataCursos>
 ): RecyclerView.Adapter<cursosAdaptador.cursosAdaptadorViewHolder>() {
@@ -35,7 +36,7 @@ class cursosAdaptador(private val activity: MainActivity, private var listaCurso
         val curso = listaCursos[position]
         holder.tvNombre.text = curso.nombre
         holder.tvSalon.text = curso.salon
-        val baseUrl = "http://192.168.1.138/app_cursos_api/"
+        val baseUrl = RetrofitCliente.BASE_URL
         val urlImagenCompleta = baseUrl + curso.urlImagen
         Glide.with(holder.itemView.context)
             .load(urlImagenCompleta)
@@ -59,3 +60,4 @@ class cursosAdaptador(private val activity: MainActivity, private var listaCurso
     }
 
 }
+

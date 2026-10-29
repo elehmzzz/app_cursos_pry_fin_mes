@@ -12,6 +12,7 @@ import com.example.app_cursos.Vistas.InscripcionActivity
 import com.example.app_cursos.R
 import com.example.app_cursos.Vistas.VerRegistrosActivity
 import com.example.app_cursos.modelo.dataEstadoInscripciones
+import com.example.app_cursos.modelo.RetrofitCliente
 
 class estadoInscripcionesAdaptador( private var listaInscripciones: List<dataEstadoInscripciones>
 ): RecyclerView.Adapter<estadoInscripcionesAdaptador.estadoInscricionesAdaptadorViewHolder>() {
@@ -43,7 +44,7 @@ class estadoInscripcionesAdaptador( private var listaInscripciones: List<dataEst
 
         holder.progressInscritos.max = inscripcion.cupoMaximo
         holder.progressInscritos.progress = inscripcion.totalInscritos
-        val baseUrl = "http://192.168.1.138/app_cursos_api/"
+        val baseUrl = RetrofitCliente.BASE_URL
         val urlImagenCompleta = baseUrl + inscripcion.urlImagen
         Glide.with(holder.itemView.context)
             .load(urlImagenCompleta)
