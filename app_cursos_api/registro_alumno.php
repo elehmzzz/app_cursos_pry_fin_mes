@@ -30,10 +30,12 @@ if (empty($matricula) || empty($nombre) || empty($apellido_paterno) || empty($co
 
 try {
     // 2. Comprobar si ya existe un usuario con la misma matrícula o correo institucional
-    $stmtCheck = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE matricula = ? OR correo_institucional = ?");
-    $stmtCheck->execute([$matricula, $correo_institucional]);
-    
-    if ($stmtCheck->rowCount() > 0) {
+   $stmtCheck = $pdo->prepare("SELECT id_usuario FROM usuarios WHERE matricula = ? OR correo_institucional = ?");
+   $stmtCheck->execute([$matricula, $correo_institucional]);
+
+   $usuarioExistente = $stmtCheck->fetch();
+
+   if ($usuarioExistente) {
         header("HTTP/1.1 409 Conflict");
         echo json_encode([
             "exito" => false,

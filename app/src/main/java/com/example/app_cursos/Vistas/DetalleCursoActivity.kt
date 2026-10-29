@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
+import com.bumptech.glide.Glide
+import com.example.app_cursos.modelo.RetrofitCliente
 import com.example.app_cursos.presentador.clsDetalleCursoPresentador
 
 class DetalleCursoActivity : AppCompatActivity() {
@@ -54,18 +56,13 @@ class DetalleCursoActivity : AppCompatActivity() {
         txtRegresar.setOnClickListener {
             finish()
         }
-        /* Obtener el ID real enviado desde el catálogo
+
+        // Obtener el ID real enviado desde el catálogo
         idCursoActual = intent.getIntExtra("id_curso", -1)
 
         if (idCursoActual != -1) {
             cargarDetalleCurso(idCursoActual)
-        }*/
-
-        /* evento de clic en el botón "Ver Detalle" dentro del adaptador del RecyclerView asi que copean esto y borran de aqui
-        val intent = Intent(context, DetalleCursoActivity::class.java).apply {
-            putExtra("id_curso", curso.id_curso)
         }
-        context.startActivity(intent)*/
 
         btnInscribirse.setOnClickListener {
             irAInscripcion()
