@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.app_cursos.Adaptador.estadoInscripcionesAdaptador
 import com.example.app_cursos.R
 import com.example.app_cursos.presentador.clsVerRegistrosPresentador
 
@@ -18,6 +19,9 @@ class VerRegistrosActivity : AppCompatActivity() {
     private lateinit var spnCarrera: Spinner
     private lateinit var txtTotalInscritos: TextView
     private lateinit var rvRegistros: RecyclerView
+
+    //se incluye el adaptador del estado de inscripcion--agregado:tello
+    private lateinit var adapterEstadoProducto: estadoInscripcionesAdaptador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,9 @@ class VerRegistrosActivity : AppCompatActivity() {
         spnCarrera = findViewById(R.id.spnCarrera)
         txtTotalInscritos = findViewById(R.id.txtTotalInscritos)
         rvRegistros = findViewById(R.id.rvRegistros)
+
+        //al adaptadorr se le pasa solo un emptyList() sin el activity verRegistroActivity--agregado:tello
+        adapterEstadoProducto = estadoInscripcionesAdaptador(emptyList())
 
         configurarRecyclerView()
 

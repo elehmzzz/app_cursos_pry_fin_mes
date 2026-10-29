@@ -62,5 +62,4 @@ class cursosAdaptador(private val activity: MainActivity, private var listaCurso
         notifyDataSetChanged()
     }
 
-
 }
