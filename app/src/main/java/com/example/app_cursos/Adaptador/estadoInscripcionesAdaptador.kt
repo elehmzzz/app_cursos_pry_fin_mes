@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import android.widget.ProgressBar
 import com.example.app_cursos.Vistas.InscripcionActivity
 import com.example.app_cursos.R
 import com.example.app_cursos.Vistas.VerRegistrosActivity
@@ -20,6 +21,7 @@ class estadoInscripcionesAdaptador( private var listaInscripciones: List<dataEst
         val tvCantInscritos: TextView = itemView.findViewById(R.id.txtCantidadInscritos)
         val tvCupoTotal: TextView = itemView.findViewById(R.id.txtCupoTotal)
         val imgCurso: ImageView = itemView.findViewById(R.id.imgCurso)
+        val progressInscritos: ProgressBar = itemView.findViewById(R.id.progressInscritos)
 
     }
 
@@ -33,9 +35,15 @@ class estadoInscripcionesAdaptador( private var listaInscripciones: List<dataEst
     override fun onBindViewHolder(holder: estadoInscricionesAdaptadorViewHolder, position: Int) {
         val inscripcion = listaInscripciones[position]
         holder.tvNombreCurso.text = inscripcion.nombre
-        holder.tvCupoTotal.text = inscripcion.cupo_maximo
-        //falta un holder para el total de alumnos inscritos
-        val baseUrl = "http://10.10.10.10/app_cursos_api/"
+        holder.tvCantInscritos.text = "Cantidad inscritos: ${inscripcion.totalInscritos}"
+        holder.tvCupoTotal.text = "Cupo total: ${inscripcion.cupoMaximo}"
+        holder.tvNombreCurso.text = inscripcion.nombre
+        holder.tvCantInscritos.text = "${inscripcion.totalInscritos} inscritos"
+        holder.tvCupoTotal.text = "/ ${inscripcion.cupoMaximo} total"
+
+        holder.progressInscritos.max = inscripcion.cupoMaximo
+        holder.progressInscritos.progress = inscripcion.totalInscritos
+        val baseUrl = "http://192.168.1.138/app_cursos_api/"
         val urlImagenCompleta = baseUrl + inscripcion.urlImagen
         Glide.with(holder.itemView.context)
             .load(urlImagenCompleta)

@@ -1,16 +1,14 @@
 package com.example.app_cursos.Adaptador
 
 import android.view.LayoutInflater
-import android.media.Image
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Button
 import com.example.app_cursos.R
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.app_cursos.Vistas.DetalleCursoActivity
 import com.example.app_cursos.Vistas.MainActivity
 import com.example.app_cursos.modelo.dataCursos
 
@@ -21,6 +19,8 @@ class cursosAdaptador(private val activity: MainActivity, private var listaCurso
         val tvNombre: TextView = itemView.findViewById(R.id.txtNombreCurso)
         val tvSalon: TextView = itemView.findViewById(R.id.txtSalon)
         val imgCurso: ImageView = itemView.findViewById(R.id.imgCurso)
+
+        val btnVerDetalle: Button = itemView.findViewById(R.id.btnVerDetalle)
     }
 
 
@@ -35,7 +35,7 @@ class cursosAdaptador(private val activity: MainActivity, private var listaCurso
         val curso = listaCursos[position]
         holder.tvNombre.text = curso.nombre
         holder.tvSalon.text = curso.salon
-        val baseUrl = "http://10.10.10.10/app_cursos_api/"
+        val baseUrl = "http://192.168.1.138/app_cursos_api/"
         val urlImagenCompleta = baseUrl + curso.urlImagen
         Glide.with(holder.itemView.context)
             .load(urlImagenCompleta)
@@ -43,13 +43,9 @@ class cursosAdaptador(private val activity: MainActivity, private var listaCurso
             .error(android.R.drawable.stat_notify_error)//imagen si falla la carga
             .into(holder.imgCurso)
 
-        holder.itemView.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(v: View?) {
-                //esta funcion se ejecuta en la vista MainActivity
-                //y se manda al presentador para que muestre el curso seleccionado
-                activity.seleccionarCurso(curso)
-            }
-        })
+        holder.btnVerDetalle.setOnClickListener {
+            activity.seleccionarCurso(curso)
+        }
 
     }
 

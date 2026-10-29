@@ -22,7 +22,12 @@ class clsLoginPresentador {
                 withContext(Dispatchers.Main) {
                     if (resultado.exito) {
                         Toast.makeText(context, resultado.mensaje, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(context, MainActivity::class.java)
+                        val intent = Intent(context, MainActivity::class.java).apply {
+                            putExtra("id_usuario", resultado.id_usuario)
+                            putExtra("matricula", resultado.matricula)
+                            putExtra("nombre_usuario", "${resultado.nombre} ${resultado.apellido_paterno}")
+                            putExtra("correo_usuario", resultado.correo_institucional)
+                        }
                         context.startActivity(intent)
                     } else {
                         Toast.makeText(context, resultado.mensaje, Toast.LENGTH_LONG).show()
