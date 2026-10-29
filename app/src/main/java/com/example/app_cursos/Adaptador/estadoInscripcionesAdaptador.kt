@@ -36,9 +36,6 @@ class estadoInscripcionesAdaptador( private var listaInscripciones: List<dataEst
     override fun onBindViewHolder(holder: estadoInscricionesAdaptadorViewHolder, position: Int) {
         val inscripcion = listaInscripciones[position]
         holder.tvNombreCurso.text = inscripcion.nombre
-        holder.tvCantInscritos.text = "Cantidad inscritos: ${inscripcion.totalInscritos}"
-        holder.tvCupoTotal.text = "Cupo total: ${inscripcion.cupoMaximo}"
-        holder.tvNombreCurso.text = inscripcion.nombre
         holder.tvCantInscritos.text = "${inscripcion.totalInscritos} inscritos"
         holder.tvCupoTotal.text = "/ ${inscripcion.cupoMaximo} total"
 
