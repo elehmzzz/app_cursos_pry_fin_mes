@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import com.example.app_cursos.modelo.clsCursoModelo
 import com.example.app_cursos.modelo.dataCursos
+import com.example.app_cursos.modelo.clsCarrerasModelos
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,17 +13,40 @@ import kotlinx.coroutines.withContext
 class clsCatalogoPresentador {
 
     private val modelo = clsCursoModelo()
-    fun obtenerCursos(context: Context, onCursosObtenidos: (List<dataCursos>) -> Unit) {
+
+    fun obtenerCursos(
+        context: Context,
+        onCursosObtenidos: (List<dataCursos>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val listaCursos = modelo.obtenerCursos()
+
                 withContext(Dispatchers.Main) {
                     onCursosObtenidos(listaCursos)
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Error de conexión: ${e.message}", Toast.LENGTH_LONG)
-                        .show()
+                    Toast.makeText(
+                        context,
+                        "Error de conexión: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
+
+    fun obtenerCarreras(context: Context, onCarrerasObtenidas: (List<clsCarrerasModelos>) -> Unit) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val listaCarreras = modelo.obtenerCarreras()
+
+                withContext(Dispatchers.Main) {
+                    onCarrerasObtenidas(listaCarreras)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Error al cargar carreras: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.app_cursos.R
+import com.bumptech.glide.Glide
+import com.example.app_cursos.modelo.RetrofitCliente
 import com.example.app_cursos.presentador.clsInscripcionPresentador
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -55,8 +57,18 @@ class InscripcionActivity : AppCompatActivity() {
         val nombreCurso = intent.getStringExtra("nombre_curso") ?: ""
         val codigoCurso = intent.getStringExtra("codigo_curso") ?: ""
         val matriculaUsuario = intent.getStringExtra("matricula") ?: ""
+        val imagenCurso = intent.getStringExtra("imagen_curso") ?: ""
         val nombreUsuario = intent.getStringExtra("nombre_usuario") ?: ""
         val correoUsuario = intent.getStringExtra("correo_usuario") ?: ""
+
+        val baseUrl = RetrofitCliente.BASE_URL
+        val urlImagenCompleta = baseUrl + imagenCurso
+
+        Glide.with(this)
+            .load(urlImagenCompleta)
+            .placeholder(android.R.drawable.ic_menu_gallery)
+            .error(android.R.drawable.stat_notify_error)
+            .into(imgCurso)
 
         // 2. Mostrar la información real en la vista
         txtNombreCurso.text = nombreCurso
