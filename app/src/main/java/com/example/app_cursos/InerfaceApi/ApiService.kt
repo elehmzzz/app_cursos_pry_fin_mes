@@ -18,6 +18,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     //CODIGO PENDIENTE
+
     //devuelve todos los cursos disponibles
     @GET("api_cursos.php")
     suspend fun obtenerCursos(): List<dataCursos>
@@ -34,9 +35,11 @@ interface ApiService {
     @POST("inscripcion_curso.php")
     suspend fun inscribirseCurso(@Body request: clsInscripcionRequest): clsInscripcionResponse
 
+    //usado para dar acceso al alumno a la aplicacion
     @POST("login.php")
     suspend fun iniciarSesion(@Body request: clsLoginRequest): clsLoginResponse
 
+    //usado para que un alumno pueda registrarse por primera vez
     @POST("registro_alumno.php")
     suspend fun registrarUsuario(@Body request: clsRegistroRequest): clsRegistroResponse
 
