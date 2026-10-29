@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_cursos.Adaptador.cursosAdaptador
 import com.example.app_cursos.R
+import com.example.app_cursos.modelo.dataCursos
 
 class MainActivity : AppCompatActivity() {
 
@@ -64,6 +65,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun irARegistros() {
         val intent = Intent(this, VerRegistrosActivity::class.java)
+        startActivity(intent)
+    }
+    fun seleccionarCurso(curso: dataCursos) {
+        val intent = Intent(this, DetalleCursoActivity::class.java)
+        // Aquí enviaremos los datos del curso seleccionado.
         startActivity(intent)
     }
 }
